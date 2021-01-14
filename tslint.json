@@ -1,0 +1,93 @@
+{
+	"extends": [
+		"tslint:latest",
+		"tslint-react"
+	],
+	"rules": {
+		"arrow-parens": false,
+		"indent": [
+			true
+		],
+		"interface-name": false,
+		"max-classes-per-file": [
+			true,
+			3
+		],
+		"max-line-length": [
+			true,
+			300
+		],
+		"no-any": true,
+		"no-invalid-this": true,
+		"no-magic-numbers": false,
+		"no-namespace": false,
+		"no-consecutive-blank-lines": false,
+		"no-reference": false,
+		"object-literal-sort-keys": false,
+		"triple-equals": true,
+		"use-isnan": true,
+		"cyclomatic-complexity": [
+			true,
+			15
+		],
+		"ordered-imports": [
+			false,
+			{
+				"import-sources-order": "any",
+				"named-imports-order": "case-insensitive"
+			}
+		],
+		"radix": false,
+		"variable-name": false,
+		"quotemark": [
+			true,
+			"single",
+			"jsx-single"
+		],
+		"prefer-object-spread": false,
+		"no-object-literal-type-assertion": false,
+		"no-bitwise": false,
+		"no-submodule-imports": false,
+		"no-implicit-dependencies": [
+			true,
+			"dev"
+		],
+		"jsx-no-multiline-js": {
+			"severity": "warning"
+		},
+		"jsx-no-lambda": {
+			"severity": "warning"
+		},
+		"jsx-boolean-value": {
+			"severity": "error"
+		},
+		"jsx-alignment": {
+			"severity": "warning"
+		},
+		"jsx-wrap-multiline": {
+			"severity": "warning"
+		},
+		"jsx-curly-spacing": {
+			"severity": "warning"
+		},
+		"jsx-equals-spacing": {
+			"severity": "warning"
+		},
+		"jsx-self-close": {
+			"severity": "warning"
+		},
+		"jsx-no-string-ref": {
+			"severity": "warning"
+		},
+		"jsdoc-format": false,
+		"deprecation": {
+			"severity": "warning"
+		}
+	},
+	"linterOptions": {
+		"exclude": [
+			"e2e/*",
+			"__tests__/*"
+		]
+	}
+}

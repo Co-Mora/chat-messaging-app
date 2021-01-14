@@ -1,0 +1,24 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"experimentalDecorators": false,
+		"importHelpers": true,
+		"jsx": "react-native",
+		"lib": ["dom", "es2017"],
+		"moduleResolution": "node",
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"outDir": "./",
+		"pretty": false,
+		"rootDir": "./",
+		"strictNullChecks": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"target": "ES6",
+		"skipLibCheck": true,
+		"noEmit": true
+	},
+	"exclude": ["node_modules", "e2e"]
+}
