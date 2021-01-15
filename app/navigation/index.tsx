@@ -8,13 +8,15 @@ import ChatList from '../modules/messaging/views/chatList';
 import AsyncStorage from '@react-native-community/async-storage';
 import Splash from '../modules/splash/views/splash';
 import NetInfo from '@react-native-community/netinfo';
-import { useRoute } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 const ChatStack = createStackNavigator();
 
-const Navigation: React.FC = () => {
-    const route = useRoute();
+export interface Props {
+    route: any
+}
+
+const Navigation: React.FC<Props> = () => {
     const [token, setToken] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -26,8 +28,7 @@ const Navigation: React.FC = () => {
     const handleNetworkIssue = () => {
         NetInfo.fetch().then(({ isConnected }) => {
             if (isConnected) setTimeout(() => {
-                setLoading(false)
-
+                setLoading(false);
             }, 500)
             else Alert.alert(
                 'No Connection Found',
@@ -39,8 +40,8 @@ const Navigation: React.FC = () => {
         })
     }
 
-    const ChatStackScreen: React.FC = () => {
-        const { name } : any = route.params;
+    const ChatStackScreen: React.FC<Props> = ({ route }) => {
+        const { name }  = route.params;
 
         return (
             <ChatStack.Navigator>

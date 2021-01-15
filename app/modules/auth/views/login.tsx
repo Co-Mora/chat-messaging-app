@@ -71,7 +71,9 @@ const Login: React.FC = () => {
                                 rules={{ required: true }}
                             />
                         </View>
-                        <View style={styles.errorContainer}> {errors.email && <Text style={styles.fieldError}>Email Address is required.</Text>}</View>
+                        <View style={styles.errorContainer}>
+                            {errors.email && <Text style={styles.fieldError}>Email Address is required.</Text>}
+                        </View>
                     </View>
                     <View>
                         <View style={styles.inputForm}>
@@ -80,7 +82,7 @@ const Login: React.FC = () => {
                                     control={control}
                                     name='password'
                                     // @ts-ignore
-                                    render={({ onChange, onFocus, onBlur, value }) => ( <TextInput style={styles.inputPasswordField} onBlur={onBlur} onFocus={onFocus} placeholder='Password' secureTextEntry={securePassowrd} placeholderTextColor='#858F95' onChangeText={value => onChange(value)} value={value} /> )}
+                                    render={({ onChange, onFocus, onBlur, value }) => (<TextInput style={styles.inputPasswordField} onBlur={onBlur} onFocus={onFocus} placeholder='Password' secureTextEntry={securePassowrd} placeholderTextColor='#858F95' onChangeText={value => onChange(value)} value={value} />)}
                                     rules={{ required: true, minLength: 9, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/ }}
                                 />
                                 <View style={styles.passwordIcon}>

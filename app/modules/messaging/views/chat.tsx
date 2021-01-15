@@ -16,22 +16,30 @@ const Chat: React.FC<Props> = ({ getUserMessages, userMessages }) => {
     const mounted = useRef();
 
     const [messages, setMessages] = useState([]);
-    const [randomMessages, setRandomMessages] = useState([]);
+    const [randomMessages, setRandomMessages] = useState([
+        {
+            name: 'KL',
+            city: 'Malaysia'
+        }
+    ]);
 
     const [isTypingNow, setIsTypingNow] = useState(false);
 
     const onSend = useCallback(async (messages = []) => {
+        setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+        setIsTypingNow(true)
+    }, [])
+
+    const handleUserMessage = async () => {
+        const uuid = await UUIDGenerator.getRandomUUID()
         const stringMessages = JSON.stringify(randomMessages);
         const parsedMessages = JSON.parse(stringMessages)
         const message = _.sample(parsedMessages);
-        const uuid = await UUIDGenerator.getRandomUUID()
-        setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-        setIsTypingNow(true)
         setTimeout(() => {
             setMessages(previousMessages => GiftedChat.append(previousMessages, {
                 // @ts-ignore
                 _id: uuid,
-                text: message.city,
+                text: message.name,
                 createdAt: new Date(),
                 user: {
                     _id: 2,
@@ -40,11 +48,8 @@ const Chat: React.FC<Props> = ({ getUserMessages, userMessages }) => {
                 },
             }))
             setIsTypingNow(false)
-        }, 1200)
-
-
-
-    }, [])
+        }, 2000)
+    }
 
     const renderToolBarInput = (props) => {
         return (
@@ -100,21 +105,19 @@ const Chat: React.FC<Props> = ({ getUserMessages, userMessages }) => {
     }
 
     useEffect(() => {
+        getUserMessages();
+        if (userMessages.length) setRandomMessages(userMessages);
 
-        if (!mounted.current) {
-            getUserMessages();
-            //@ts-ignore
-            mounted.current = true;
-        } else {
-            if (userMessages.length > 0) setRandomMessages(userMessages)
-        }
-
-    }, [userMessages.length, randomMessages.length]);
+    }, [randomMessages.length, userMessages.length, mounted]);
 
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <GiftedChat placeholder={'Type here...'} isTyping={isTypingNow} scrollToBottom alwaysShowSend={true} messagesContainerStyle={{ backgroundColor: '#FFF' }} renderTime={renderTime} renderActions={renderAction} renderChatEmpty={renderChatEmpty} renderInputToolbar={renderToolBarInput} renderBubble={renderBubble} renderSend={renderSend} messages={messages} onSend={messages => onSend(messages)} user={{ _id: 1 }} />
+            <GiftedChat placeholder={'Type here...'} isTyping={isTypingNow} scrollToBottom alwaysShowSend={true} messagesContainerStyle={{ backgroundColor: '#FFF' }} renderTime={renderTime} renderActions={renderAction} renderChatEmpty={renderChatEmpty} renderInputToolbar={renderToolBarInput} renderBubble={renderBubble} renderSend={renderSend} messages={messages} onSend={messages => {
+                handleUserMessage()
+                onSend(messages)
+            }
+            } user={{ _id: 1 }} />
         </SafeAreaView>
     )
 }
